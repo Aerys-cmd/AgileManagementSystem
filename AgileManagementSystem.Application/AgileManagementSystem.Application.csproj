@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
-    <Folder Include="Services\Auth\" />
     <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgileManagementSystem.Core\AgileManagementSystem.Core.csproj" />
+    <ProjectReference Include="..\AgileManagementSystem.Domain\AgileManagementSystem.Domain.csproj" />
   </ItemGroup>
 
 </Project>

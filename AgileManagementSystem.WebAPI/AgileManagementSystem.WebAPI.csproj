@@ -8,4 +8,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AgileManagementSystem.Application\AgileManagementSystem.Application.csproj" />
+    <ProjectReference Include="..\AgileManagementSystem.Infrastructure\AgileManagementSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\AgileManagementSystem.Persistence.EF\AgileManagementSystem.Persistence.EF.csproj" />
+  </ItemGroup>
+
 </Project>

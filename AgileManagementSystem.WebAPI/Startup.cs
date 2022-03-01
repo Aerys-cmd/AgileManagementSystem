@@ -1,3 +1,6 @@
+using AgileManagementSystem.Application;
+using AgileManagementSystem.Infrastructure;
+using AgileManagementSystem.Persistence.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +35,9 @@ namespace AgileManagementSystem.WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgileManagementSystem.WebAPI", Version = "v1" });
             });
+            ApplicationModule.Load(services);
+            InfrastructureModule.Load(services);
+            EFModule.Load(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

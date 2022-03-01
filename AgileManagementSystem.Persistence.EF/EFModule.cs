@@ -23,6 +23,7 @@ namespace AgileManagementSystem.Persistence.EF
             services.AddScoped<IUserRepository, EFUserRepository>();
             services.AddScoped<IProjectRepository, EFProjectRepository>();
 
+
         }
     }
 }
