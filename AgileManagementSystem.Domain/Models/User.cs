@@ -51,6 +51,9 @@ namespace AgileManagementSystem.Domain.Models
 
         public bool EmailVerified { get; private set; }
 
+        private List<UserToken> userTokens { get; set; } = new();
+        public IReadOnlyList<UserToken> UserTokens => userTokens;
+
 
         public User(string email)
         {
@@ -138,6 +141,12 @@ namespace AgileManagementSystem.Domain.Models
 
             this.ProfilePictureUrl = profilePictureUrl.Trim();
         }
+
+        public void AddUserToken(UserToken userToken)
+        {
+            userTokens.Add(userToken);
+        }
+
 
         public void SetVerifyEmail()
         {
