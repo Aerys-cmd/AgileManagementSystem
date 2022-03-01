@@ -24,17 +24,29 @@ namespace AgileManagementSystem.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get()
         {
             var rng = new Random();
+            if (rng.Equals(new Random()))
+            {
+                return Ok(Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                })
+           .ToArray());
 
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            }
+
+            return UnprocessableEntity(Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
-            .ToArray();
+           .ToArray());
+
         }
     }
 }

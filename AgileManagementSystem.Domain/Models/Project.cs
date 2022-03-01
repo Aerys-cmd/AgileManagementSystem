@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AgileManagementSystem.Domain.Models
 {
-    public class Project:Entity
+    public class Project : Entity
     {
         public string Name { get; private set; }
         public string Description { get; set; }
@@ -52,7 +52,7 @@ namespace AgileManagementSystem.Domain.Models
             // Projeye dahil etme isteğinde bulunduk
             // eğer kullanıcı mail adresinden isteği kabul et butonuna basarsa bu durumda projede contributor olarak görünebilecek ve projeye erişm izni olacak.
 
-            if (contributors.Any(x => x.UserId == contributor.UserId))
+            if (contributors.Any(x => x.Email == contributor.Email))
             {
                 throw new Exception("Aynı user aynı projeye contritor olarak eklenemez");
             }
@@ -61,7 +61,7 @@ namespace AgileManagementSystem.Domain.Models
                 // aynı contributor eklenemez
                 // contibuter eklenirken contributor state waitingforrequest olarak ayalarnır.
                 contributors.Add(contributor);
-                DomainEvent.Raise(new ContributorSendAccessRequestEvent(this.Name, this.Id, contributor.UserId));
+                //DomainEvent.Raise(new ContributorSendAccessRequestEvent(this.Name, this.Id, contributor.UserId));
             }
 
 
@@ -74,7 +74,7 @@ namespace AgileManagementSystem.Domain.Models
         public void RemoveContributor(Contributor contributor)
         {
             contributors.Remove(contributor);
-            DomainEvent.Raise(new ContributorRevokeAccessEvent(this.Name, contributor.UserId));
+            //DomainEvent.Raise(new ContributorRevokeAccessEvent(this.Name, contributor.UserId));
         }
 
     }
