@@ -36,7 +36,7 @@ namespace AgileManagementSystem.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgileManagementSystem.WebAPI", Version = "v1" });
             });
             ApplicationModule.Load(services);
-            InfrastructureModule.Load(services);
+            InfrastructureModule.Load(services,Configuration);
             EFModule.Load(services, Configuration);
         }
 
