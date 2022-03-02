@@ -34,6 +34,7 @@ namespace AgileManagementSystem.Application.Services.Auth
         public async Task<UserLoginAuthResponseDto> OnProcess(UserLoginAuthRequestDto request = null)
         {
             var user = _userRepository.GetQuery().Where(x => x.Email == request.Email && x.PasswordHash == CustomPasswordHashService.HashPassword(request.Password)).FirstOrDefault();
+
             if (user == null) return await Task.FromResult(new UserLoginAuthResponseDto
             {
                 IsSucceeded = false
@@ -45,8 +46,8 @@ namespace AgileManagementSystem.Application.Services.Auth
                 };
 
             var tokenResponse = await _tokenService.GenerateTokenAsync(claims);
-            var userToken = new UserToken(tokenResponse.AccessToken, tokenResponse.RefreshToken);
-            user.AddUserToken(userToken);
+            user.SetRefreshToken(tokenResponse.RefreshToken);
+            _userRepository.Save();
 
             return await Task.FromResult(new UserLoginAuthResponseDto
             {

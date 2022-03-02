@@ -1,5 +1,4 @@
 ﻿using AgileManagement.Infrastructure.Notification.Smtp;
-using AgileManagement.Infrastructure.Security.Hash;
 using AgileManagementSystem.Core.Authentication;
 using AgileManagementSystem.Core.Domain;
 using AgileManagementSystem.Core.Notification;
@@ -20,7 +19,7 @@ namespace AgileManagementSystem.Infrastructure
 {
     public static class InfrastructureModule
     {
-        public static void Load(IServiceCollection services,IConfiguration configuration )
+        public static void Load(IServiceCollection services, IConfiguration configuration)
         {
 
             services.AddSingleton<IDomainEventDispatcher, NetCoreEventDispatcher>();

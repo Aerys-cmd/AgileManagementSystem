@@ -13,6 +13,8 @@ namespace AgileManagementSystem.Application
         public static void Load(IServiceCollection services)
         {
             services.AddScoped<UserLoginAuthService>();
+            services.AddScoped<UserLoginRefreshTokenAuthService>();
+
         }
     }
 }
