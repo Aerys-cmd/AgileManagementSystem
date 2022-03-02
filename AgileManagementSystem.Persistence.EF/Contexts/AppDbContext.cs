@@ -12,15 +12,14 @@ namespace AgileManagementSystem.Persistence.EF.Contexts
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        private readonly IConfiguration _configuration;
-        public AppDbContextFactory(IConfiguration configuration)
+        public AppDbContextFactory()
         {
-            _configuration = configuration;
+
         }
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("LocalDb"));
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-1AKBKH5;Database=AgileManagementDb;Trusted_Connection=true");
 
             return new AppDbContext(optionsBuilder.Options);
         }
