@@ -1,4 +1,6 @@
 ﻿using AgileManagementSystem.Application.Services.Auth;
+using AgileManagementSystem.Application.Services.ProjectServices;
+using AgileManagementSystem.Application.Services.Verify;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,8 +15,13 @@ namespace AgileManagementSystem.Application
         public static void Load(IServiceCollection services)
         {
             services.AddScoped<UserLoginAuthService>();
+
             services.AddScoped<UserLoginRefreshTokenAuthService>();
+
             services.AddScoped<UserRegisterService>();
+
+            services.AddScoped<UserVerifyMailService>();
+            services.AddScoped<ProjectAddService>();
 
         }
     }

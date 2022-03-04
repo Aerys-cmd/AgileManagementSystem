@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgileManagementSystem.Application.Services.Auth
+namespace AgileManagementSystem.Application.Services.Verify
 {
     public class UserVerifyEmailRequestDto
     {
@@ -35,9 +35,14 @@ namespace AgileManagementSystem.Application.Services.Auth
             if (user == null)
                 return new UserVerifyEmailResponseDto { IsSucceeded = false, Message = "Böyle bir user bulunamadı" };
 
-            user.SetVerifyEmail
+            user.SetVerifyEmail();
+            _userRepository.Save();
 
-            throw new NotImplementedException();
+            return new UserVerifyEmailResponseDto
+            {
+                IsSucceeded = true,
+                Message = "Başarılı"
+            };
         }
     }
 }

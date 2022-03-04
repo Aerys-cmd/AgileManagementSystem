@@ -4,6 +4,7 @@ using AgileManagementSystem.Core.Domain;
 using AgileManagementSystem.Core.Notification;
 using AgileManagementSystem.Core.Security;
 using AgileManagementSystem.Infrastructure.Events;
+using AgileManagementSystem.Infrastructure.Security.Authentication;
 using AgileManagementSystem.Infrastructure.Security.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -22,12 +23,15 @@ namespace AgileManagementSystem.Infrastructure
         public static void Load(IServiceCollection services, IConfiguration configuration)
         {
 
+            services.AddHttpContextAccessor();
+
             services.AddSingleton<IDomainEventDispatcher, NetCoreEventDispatcher>();
             // konfigürasyon, yardımcı servis gibi tek instance ile çalışabilen yapılar için singleton tercih edelim
             services.AddSingleton<IEmailService, NetSmtpEmailService>();
             // veri tabanı , servis çağırısı, api çağırısı gibi işlemler için scoped tercih edelim
 
             services.AddSingleton<ITokenService, JwtTokenService>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
                 opt.SaveToken = true;// token sessionda tutumamızı sağlar
@@ -45,6 +49,8 @@ namespace AgileManagementSystem.Infrastructure
 
                 };
             });
+
+            services.AddTransient<IAuthenticatedUserService, AuthenticatedUserService>();
 
         }
     }

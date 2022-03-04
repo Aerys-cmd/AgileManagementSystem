@@ -33,12 +33,13 @@ namespace AgileManagementSystem.Application.Services.Auth
         }
         public async Task<UserLoginAuthResponseDto> OnProcess(UserLoginAuthRequestDto request = null)
         {
-            var user = _userRepository.GetQuery().Where(x => x.Email == request.Email && x.PasswordHash == CustomPasswordHashService.HashPassword(request.Password)).FirstOrDefault();
+            var user = _userRepository.GetQuery().Where(x => x.Email == request.Email && x.PasswordHash == CustomPasswordHashService.HashPassword(request.Password) && x.EmailVerified == true).FirstOrDefault();
 
             if (user == null) return await Task.FromResult(new UserLoginAuthResponseDto
             {
                 IsSucceeded = false
             });
+
             var claims = new List<Claim>
                 {
                     new Claim("id",user.Id),
