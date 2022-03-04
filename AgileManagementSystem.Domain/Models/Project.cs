@@ -61,7 +61,7 @@ namespace AgileManagementSystem.Domain.Models
                 // aynı contributor eklenemez
                 // contibuter eklenirken contributor state waitingforrequest olarak ayalarnır.
                 contributors.Add(contributor);
-                //DomainEvent.Raise(new ContributorSendAccessRequestEvent(this.Name, this.Id, contributor.UserId));
+                //DomainEvent.Raise(new ContributorSendAccessRequestEvent(this.Name, this.Id));
             }
 
 

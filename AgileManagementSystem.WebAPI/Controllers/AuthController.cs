@@ -14,11 +14,24 @@ namespace AgileManagementSystem.WebAPI.Controllers
     {
         private readonly UserLoginAuthService _loginAuthService;
         private readonly UserLoginRefreshTokenAuthService _refreshTokenAuthService;
+        private readonly UserRegisterService _userRegisterService;
 
-        public AuthController(UserLoginAuthService loginAuthService, UserLoginRefreshTokenAuthService refreshTokenAuthService)
+        public AuthController(UserLoginAuthService loginAuthService, UserLoginRefreshTokenAuthService refreshTokenAuthService, UserRegisterService userRegisterService)
         {
+            _userRegisterService = userRegisterService;
             _loginAuthService = loginAuthService;
             _refreshTokenAuthService = refreshTokenAuthService;
+        }
+        [HttpPost("userregister")]
+        public IActionResult Register(UserRegisterRequestDto model)
+        {
+            var response = _userRegisterService.OnProcess(model);
+            if (response.IsSucceeded)
+            {
+                return Ok(response.Message);
+            }
+
+            return BadRequest(response.Message);
         }
 
         [HttpPost("get-token")]

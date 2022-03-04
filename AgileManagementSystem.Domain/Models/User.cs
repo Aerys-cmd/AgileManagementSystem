@@ -49,7 +49,7 @@ namespace AgileManagementSystem.Domain.Models
         /// <param name="email"></param>
         /// 
 
-        public bool EmailVerified { get; private set; }
+        public bool EmailVerified { get; private set; } = false;
         public string RefreshToken { get; private set; }
 
         public User(string email)

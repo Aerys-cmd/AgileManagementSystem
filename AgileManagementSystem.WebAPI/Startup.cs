@@ -1,4 +1,5 @@
 using AgileManagementSystem.Application;
+using AgileManagementSystem.Domain;
 using AgileManagementSystem.Infrastructure;
 using AgileManagementSystem.Persistence.EF;
 using Microsoft.AspNetCore.Builder;
@@ -35,9 +36,21 @@ namespace AgileManagementSystem.WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgileManagementSystem.WebAPI", Version = "v1" });
             });
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyMethod(); // GET,POST apida açýk, HTTPDELETE, HTTPUT içinde açmýþ olduk; 415 hatasýda HttpMethod izni verilmemiþtir.
+                    policy.AllowAnyOrigin(); // Herhangi bir domaine istek atabiliriz.
+                    //policy.WithOrigins("www.a.com", "www.b.com");
+                    policy.AllowAnyHeader(); // Application/json appliation/xml
+                    //policy.WithHeaders("x-token"); // Application/json appliation/xml
+                });
+            });
             ApplicationModule.Load(services);
             InfrastructureModule.Load(services, Configuration);
             EFModule.Load(services, Configuration);
+            DomainModule.Load(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +64,7 @@ namespace AgileManagementSystem.WebAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
             app.UseAuthentication();
 

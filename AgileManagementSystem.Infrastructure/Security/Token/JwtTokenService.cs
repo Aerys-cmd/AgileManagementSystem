@@ -51,7 +51,8 @@ namespace AgileManagementSystem.Infrastructure.Security.Token
 
                 ValidateAudience = false,
                 ValidateIssuer = false,
-                ValidateIssuerSigningKey = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:signingKey"])),
                 ValidateLifetime = false
             };
 

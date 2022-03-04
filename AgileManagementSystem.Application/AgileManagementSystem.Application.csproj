@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
+    <Folder Include="Services\Verify\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 

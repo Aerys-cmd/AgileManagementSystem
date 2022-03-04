@@ -14,6 +14,7 @@ namespace AgileManagementSystem.Application
         {
             services.AddScoped<UserLoginAuthService>();
             services.AddScoped<UserLoginRefreshTokenAuthService>();
+            services.AddScoped<UserRegisterService>();
 
         }
     }
