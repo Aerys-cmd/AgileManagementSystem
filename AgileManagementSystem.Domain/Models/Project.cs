@@ -43,6 +43,7 @@ namespace AgileManagementSystem.Domain.Models
         }
 
 
+
         /// <summary>
         /// Projeye contributor ekleme işlemi olsun
         /// </summary>

@@ -43,7 +43,7 @@ namespace AgileManagementSystem.Application.Services.Auth
             var claims = new List<Claim>
                 {
                     new Claim("id",user.Id),
-                    new Claim("email",user.Email),
+                    new Claim("mail",user.Email),
                 };
 
             var tokenResponse = await _tokenService.GenerateTokenAsync(claims);

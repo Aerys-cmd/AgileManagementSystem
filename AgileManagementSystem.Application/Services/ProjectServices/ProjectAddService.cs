@@ -39,6 +39,7 @@ namespace AgileManagementSystem.Application.Services.ProjectServices
         public ProjectAddService(IProjectRepository projectRepository, IAuthenticatedUserService authenticatedUserService)
         {
             _projectRepository = projectRepository;
+            _authenticatedUserService = authenticatedUserService;
         }
         public ProjectAddResponseDto OnProcess(ProjectAddRequestDto request = null)
         {

@@ -16,21 +16,4 @@ namespace AgileManagementSystem.Core.Domain
         /// </summary>
         public string Name { get; set; } // EventName, OrderedEvent,ShippedEvent,PriceChanged
     }
-
-    public class UserRegisteredEvent : IDomainEvent
-    {
-        public string Name { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-
-    }
-
-    public class UserRegisterHandler : IDomainEventHandler<UserRegisteredEvent>
-    {
-        public void Handle(UserRegisteredEvent @event)
-        {
-           
-            throw new NotImplementedException();
-        }
-    }
 }

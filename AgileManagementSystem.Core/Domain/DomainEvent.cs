@@ -11,8 +11,6 @@ namespace AgileManagementSystem.Core.Domain
     /// </summary>
     public static class DomainEvent
     {
-    
-
         public static IDomainEventDispatcher Dispatcher { get; set; } 
 
        
@@ -20,8 +18,6 @@ namespace AgileManagementSystem.Core.Domain
         {
 
             Dispatcher.Dispatch(@event);
-
-           
         }
     }
 }

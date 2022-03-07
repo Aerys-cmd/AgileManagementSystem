@@ -23,6 +23,10 @@ namespace AgileManagementSystem.Application
             services.AddScoped<UserVerifyMailService>();
             services.AddScoped<ProjectAddService>();
 
+            services.AddScoped<DeleteProjectService>();
+            services.AddScoped<GetUsersProjectsService>();
+            services.AddScoped<SendContributorProjectAccessService>();
+
         }
     }
 }

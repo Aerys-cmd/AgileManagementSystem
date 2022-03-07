@@ -20,7 +20,7 @@ namespace AgileManagementSystem.Infrastructure.Security.Authentication
 
                 return new AuthenticatedUser
                 {
-                    Email = _httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "email").Value,
+                    Email = _httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "mail").Value,
                     Id = _httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "id").Value
                 };
             } }
