@@ -1,6 +1,7 @@
 ﻿using AgileManagementSystem.Core.Domain;
 using AgileManagementSystem.Domain.Events;
 using AgileManagementSystem.Domain.Handlers;
+using AgileManagementSystem.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace AgileManagementSystem.Domain
             // event handlerlar her çağrıldığında sistem tarafından yeni bir instance alınsın.
             services.AddTransient<IDomainEventHandler<ContributorSendAccessRequestEvent>, ContributerSendAccessRequestHandler>();
             services.AddTransient<IDomainEventHandler<UserCreatedEvent>, UserCreatedHandler>();
+            services.AddScoped<IContributorAddService, ContributorAddService>();
         }
     }
 }

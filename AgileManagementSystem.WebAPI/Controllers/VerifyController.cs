@@ -13,8 +13,10 @@ namespace AgileManagementSystem.WebAPI.Controllers
     public class VerifyController : ControllerBase
     {
         private readonly UserVerifyMailService _userVerifyMailService;
-        public VerifyController(UserVerifyMailService userVerifyMailService)
+        private readonly AcceptProjectAccessService _acceptProjectAccessService;
+        public VerifyController(UserVerifyMailService userVerifyMailService, AcceptProjectAccessService acceptProjectAccessService)
         {
+            _acceptProjectAccessService = acceptProjectAccessService;
             _userVerifyMailService = userVerifyMailService;
         }
 
@@ -31,10 +33,17 @@ namespace AgileManagementSystem.WebAPI.Controllers
             return BadRequest(response.Message);
         }
 
-        [HttpPost]
-        public IActionResult AcceptProjectAccess()
+        [HttpPost("accept-project-access")]
+        public IActionResult AcceptProjectAccess(AcceptProjectAccessRequestDto request)
         {
+            var response = _acceptProjectAccessService.OnProcess(request);
 
+            if (response.IsSucceeded)
+            {
+                return Ok(response.Message);
+            }
+            return BadRequest(response.Message);
         }
+
     }
 }

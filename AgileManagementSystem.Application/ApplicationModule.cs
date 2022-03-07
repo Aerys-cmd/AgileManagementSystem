@@ -26,6 +26,7 @@ namespace AgileManagementSystem.Application
             services.AddScoped<DeleteProjectService>();
             services.AddScoped<GetUsersProjectsService>();
             services.AddScoped<SendContributorProjectAccessService>();
+            services.AddScoped<AcceptProjectAccessService>();
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using AgileManagementSystem.Core.Application;
 using AgileManagementSystem.Domain.Models;
 using AgileManagementSystem.Domain.Repositories;
+using AgileManagementSystem.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,13 @@ namespace AgileManagementSystem.Application.Services.Verify
         public bool IsSucceeded { get; set; }
         public string Message { get; set; }
     }
-    public class AcceptProjectAccessService : IApplicationService<AcceptProjectAccessRequestDto, AcceptProjectAccessRequestDto>
+    public class AcceptProjectAccessService : IApplicationService<AcceptProjectAccessRequestDto, AcceptProjectAccessResponseDto>
     {
         private readonly IProjectRepository _projectRepository;
-        public AcceptProjectAccessService(IProjectRepository projectRepository)
+        private readonly IContributorAddService _contributorAddService;
+        public AcceptProjectAccessService(IProjectRepository projectRepository, IContributorAddService contributorAddService)
         {
+            _contributorAddService = contributorAddService;
             _projectRepository = projectRepository;
         }
         public AcceptProjectAccessResponseDto OnProcess(AcceptProjectAccessRequestDto request = null)
@@ -41,13 +44,14 @@ namespace AgileManagementSystem.Application.Services.Verify
 
             var project = _projectRepository.Find(request.ProjectId);
 
+            var contributor = new Contributor(request.ContributorEmail);
+            _contributorAddService.AddContributor(contributor, project);
 
-            var existingContributor = _projectRepository.GetQuery().Include(x => x.Contributers).SelectMany(x => x.Contributers).FirstOrDefault(x => x.Email == request.ContributorEmail);
-            if (existingContributor == null)
+            return new AcceptProjectAccessResponseDto
             {
-                existingContributor = new Contributor(request.ContributorEmail);
-            }
-            project.AddContributor(existingContributor);
+                IsSucceeded = true,
+                Message = "Contributor eklendi."
+            };
         }
     }
 }
