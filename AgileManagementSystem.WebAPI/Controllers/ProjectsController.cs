@@ -18,10 +18,8 @@ namespace AgileManagementSystem.WebAPI.Controllers
         private readonly SendContributorProjectAccessService _sendContributorProjectAccessService;
         private readonly DeleteProjectService _deleteProjectService;
         private readonly GetUsersProjectsService _getUsersProjectsService;
-        private readonly IAuthenticatedUserService _authenticatedUserService;
-        public ProjectsController(ProjectAddService projectAddService, SendContributorProjectAccessService sendContributorProjectAccessService, DeleteProjectService deleteProjectService, GetUsersProjectsService getUsersProjectsService, IAuthenticatedUserService authenticatedUserService)
+        public ProjectsController(ProjectAddService projectAddService, SendContributorProjectAccessService sendContributorProjectAccessService, DeleteProjectService deleteProjectService, GetUsersProjectsService getUsersProjectsService)
         {
-            _authenticatedUserService = authenticatedUserService;
             _deleteProjectService = deleteProjectService;
             _projectAddService = projectAddService;
             _sendContributorProjectAccessService = sendContributorProjectAccessService;
@@ -68,7 +66,7 @@ namespace AgileManagementSystem.WebAPI.Controllers
         [HttpGet("get-users-projects")]
         public IActionResult GetUsersProjects()
             {
-            var response = _getUsersProjectsService.OnProcess(new GetUsersProjectsRequestDto { UserId = _authenticatedUserService.GetUser.Id });
+            var response = _getUsersProjectsService.OnProcess();
             if (response.IsSucceeded)
             {
                 return Ok(response);
@@ -77,10 +75,7 @@ namespace AgileManagementSystem.WebAPI.Controllers
             return BadRequest();
         }
 
-        //a.com/?enes=123123&asdasdasd=213213213
-        //a.com/DeleteProject
-
-        ///www.a.com/api/Project/AddProject
+     
 
 
 

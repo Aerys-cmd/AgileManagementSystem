@@ -1,5 +1,6 @@
 ﻿using AgileManagementSystem.Application.Dtos;
 using AgileManagementSystem.Core.Application;
+using AgileManagementSystem.Core.Authentication;
 using AgileManagementSystem.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace AgileManagementSystem.Application.Services.ProjectServices
 {
     public class GetUsersProjectsRequestDto
     {
-        public string UserId { get; set; }
     }
     public class GetUsersProjectsResponseDto
     {
@@ -23,13 +23,15 @@ namespace AgileManagementSystem.Application.Services.ProjectServices
     public class GetUsersProjectsService : IApplicationService<GetUsersProjectsRequestDto, GetUsersProjectsResponseDto>
     {
         private readonly IProjectRepository _projectRepository;
-        public GetUsersProjectsService(IProjectRepository projectRepository)
+        private readonly IAuthenticatedUserService _authenticatedUserService;
+        public GetUsersProjectsService(IProjectRepository projectRepository, IAuthenticatedUserService authenticatedUserService)
         {
+            _authenticatedUserService = authenticatedUserService;
             _projectRepository = projectRepository;
         }
         public GetUsersProjectsResponseDto OnProcess(GetUsersProjectsRequestDto request = null)
         {
-            var usersProjects = _projectRepository.GetQuery().Where(x => x.CreatedBy == request.UserId).ToList();
+            var usersProjects = _projectRepository.GetQuery().Where(x => x.CreatedBy == _authenticatedUserService.GetUser.Id).ToList();
             if (usersProjects == null)
             {
                 return new GetUsersProjectsResponseDto

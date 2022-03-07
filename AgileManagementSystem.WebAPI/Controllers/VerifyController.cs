@@ -30,5 +30,11 @@ namespace AgileManagementSystem.WebAPI.Controllers
 
             return BadRequest(response.Message);
         }
+
+        [HttpPost]
+        public IActionResult AcceptProjectAccess()
+        {
+
+        }
     }
 }
