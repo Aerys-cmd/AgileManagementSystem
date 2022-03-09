@@ -18,12 +18,17 @@ namespace AgileManagementSystem.Domain.Services
         }
         public void AddContributor(Contributor contributor, Project project)
         {
-            var existingContributor = _projectRepository.GetQuery().Include(x => x.Contributers).SelectMany(x => x.Contributers).FirstOrDefault(x => x.Email == contributor.Email);
+            var existingContributor = _projectRepository.GetQuery().Include(x => x.Contributors).SelectMany(x => x.Contributors).FirstOrDefault(x => x.Email == contributor.Email);
             if (existingContributor == null)
             {
                 project.AddContributor(contributor);
+                return;
             }
-            project.AddContributor(existingContributor);
+            else
+            {
+                project.AddContributor(existingContributor);
+                return;
+            }
         }
     }
 }

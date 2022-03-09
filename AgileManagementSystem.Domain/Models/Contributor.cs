@@ -11,9 +11,8 @@ namespace AgileManagementSystem.Domain.Models
     {
         public string Email { get; private set; }
 
-        private List<Project> projects = new List<Project>();
-        public IReadOnlyList<Project> Projects => projects;
-
+        private List<Project> _projects = new List<Project>();
+        public IReadOnlyCollection<Project> Projects => _projects;
         public Contributor(string email)
         {
             Id = Guid.NewGuid().ToString();
@@ -31,6 +30,7 @@ namespace AgileManagementSystem.Domain.Models
             {
                 throw new Exception("Email gerekli bir alandır.");
             }
+            Email = email;
         }
     }
 }

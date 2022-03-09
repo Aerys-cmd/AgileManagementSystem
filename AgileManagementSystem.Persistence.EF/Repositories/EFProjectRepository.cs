@@ -19,7 +19,7 @@ namespace AgileManagementSystem.Persistence.EF.Repositories
 
         public override Project Find(string Id)
         {
-            return _dbSet.Include(x => x.Contributers).FirstOrDefault(x => x.Id == Id);
+            return _dbSet.Include(x => x.Contributors).FirstOrDefault(x => x.Id == Id);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace AgileManagementSystem.Domain.Models
         public string Name { get; private set; }
         public string Description { get; set; }
 
-        private List<Contributor> contributors = new List<Contributor>();
-        public IReadOnlyList<Contributor> Contributers => contributors;
+        private List<Contributor> _contributors = new List<Contributor>();
+        public IReadOnlyCollection<Contributor> Contributors => _contributors;
 
         public string CreatedBy { get; private set; }
 
@@ -51,10 +51,11 @@ namespace AgileManagementSystem.Domain.Models
         /// <param name="contributor"></param>
         public void AddContributor(Contributor contributor)
         {
+
             // Projeye dahil etme isteğinde bulunduk
             // eğer kullanıcı mail adresinden isteği kabul et butonuna basarsa bu durumda projede contributor olarak görünebilecek ve projeye erişm izni olacak.
 
-            if (contributors.Any(x => x.Email == contributor.Email))
+            if (_contributors.Any(x => x.Email == contributor.Email))
             {
                 throw new Exception("Aynı user aynı projeye contritor olarak eklenemez");
             }
@@ -62,7 +63,7 @@ namespace AgileManagementSystem.Domain.Models
             {
                 // aynı contributor eklenemez
                 // contibuter eklenirken contributor state waitingforrequest olarak ayalarnır.
-                contributors.Add(contributor);
+                _contributors.Add(contributor);
                 //DomainEvent.Raise(new ContributorSendAccessRequestEvent(this.Name, this.Id));
             }
 
@@ -75,7 +76,7 @@ namespace AgileManagementSystem.Domain.Models
         /// <param name="contributor"></param>
         public void RemoveContributor(Contributor contributor)
         {
-            contributors.Remove(contributor);
+            _contributors.Remove(contributor);
             //DomainEvent.Raise(new ContributorRevokeAccessEvent(this.Name, contributor.UserId));
         }
 

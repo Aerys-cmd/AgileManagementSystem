@@ -39,7 +39,7 @@ namespace AgileManagementSystem.Application.Services.ProjectServices
             //projenin contributorlarına projenin silindiğine dair mail at
 
             _projectRepository.Remove(request.ProjectId);
-            var contributorMails = project.Contributers.Select(x => x.Email).ToList();
+            var contributorMails = project.Contributors.Select(x => x.Email).ToList();
             DomainEvent.Raise(new ProjectDeletedEvent(project.Name, contributorMails));
             _projectRepository.Save();
 

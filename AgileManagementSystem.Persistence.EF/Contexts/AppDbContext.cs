@@ -32,5 +32,30 @@ namespace AgileManagementSystem.Persistence.EF.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Project>()
+                .HasMany(x => x.Contributors)
+                .WithMany(x => x.Projects);
+
+            //modelBuilder.Entity<Project>()
+            //    .Property(x => x.Contributors)
+            //    .HasField("_contributors")
+            //    .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+
+            modelBuilder.Entity<Contributor>()
+              .HasMany(x => x.Projects)
+              .WithMany(x => x.Contributors);
+
+            //modelBuilder.Entity<Contributor>()
+            //   .Property(x => x.Projects)
+            //   .HasField("_projects")
+            //   .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

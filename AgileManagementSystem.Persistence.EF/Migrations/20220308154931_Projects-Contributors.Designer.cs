@@ -3,14 +3,16 @@ using AgileManagementSystem.Persistence.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AgileManagementSystem.Persistence.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220308154931_Projects-Contributors")]
+    partial class ProjectsContributors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,13 +91,13 @@ namespace AgileManagementSystem.Persistence.EF.Migrations
 
             modelBuilder.Entity("ContributorProject", b =>
                 {
-                    b.Property<string>("ContributorsId")
+                    b.Property<string>("ContributersId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProjectsId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ContributorsId", "ProjectsId");
+                    b.HasKey("ContributersId", "ProjectsId");
 
                     b.HasIndex("ProjectsId");
 
@@ -106,7 +108,7 @@ namespace AgileManagementSystem.Persistence.EF.Migrations
                 {
                     b.HasOne("AgileManagementSystem.Domain.Models.Contributor", null)
                         .WithMany()
-                        .HasForeignKey("ContributorsId")
+                        .HasForeignKey("ContributersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -63,7 +63,7 @@ namespace AgileManagementSystem.WebAPI.Controllers
 
             return BadRequest();
         }
-        [HttpGet("get-users-projects")]
+        [HttpGet("get-users-projects")][Authorize]
         public IActionResult GetUsersProjects()
             {
             var response = _getUsersProjectsService.OnProcess();
