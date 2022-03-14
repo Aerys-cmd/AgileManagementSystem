@@ -15,6 +15,8 @@ namespace AgileManagementSystem.Domain.Models
 
         private List<Contributor> _contributors = new List<Contributor>();
         public IReadOnlyCollection<Contributor> Contributors => _contributors;
+        private List<ProductBacklogItem> _productBacklog = new();
+        public IReadOnlyCollection<ProductBacklogItem> ProductBacklog => _productBacklog;
 
         public string CreatedBy { get; private set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AgileManagementSystem.Domain.Models
 {
-    public class Contributor : Entity
+    public class Contributor
     {
         public string Email { get; private set; }
 
