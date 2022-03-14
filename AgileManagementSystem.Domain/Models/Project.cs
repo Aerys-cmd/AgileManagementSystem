@@ -15,6 +15,7 @@ namespace AgileManagementSystem.Domain.Models
 
         private List<Contributor> _contributors = new List<Contributor>();
         public IReadOnlyCollection<Contributor> Contributors => _contributors;
+
         private List<ProductBacklogItem> _productBacklog = new();
         public IReadOnlyCollection<ProductBacklogItem> ProductBacklog => _productBacklog;
 
@@ -24,7 +25,6 @@ namespace AgileManagementSystem.Domain.Models
 
         public Project(string name, string description, string createdBy)
         {
-            Id = Guid.NewGuid().ToString();
             SetName(name);
             Description = description;
             CreatedBy = createdBy;
@@ -70,6 +70,19 @@ namespace AgileManagementSystem.Domain.Models
             }
 
 
+        }
+
+
+        public void AddProductBacklogItem(ProductBacklogItem productBacklogItem)
+        {
+            if (_productBacklog.Any(x => x.Title == productBacklogItem.Title))
+            {
+                throw new Exception("Aynı user aynı projeye contributor olarak eklenemez");
+            }
+            else
+            {
+                _productBacklog.Add(productBacklogItem);
+            }
         }
 
         /// <summary>

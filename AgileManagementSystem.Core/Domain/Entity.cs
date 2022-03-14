@@ -11,7 +11,7 @@ namespace AgileManagementSystem.Core.Domain
     /// </summary>
     public abstract class Entity
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
     }
 
 }
